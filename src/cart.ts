@@ -10,23 +10,22 @@ export default class Cart {
 
     // Добавление товара в корзину
     addProduct(product: Product, quantity: number): void {
-        const existingItem = this.items.find(item => item.id === product.id);
-        if(existingItem) {
+        const existingItem = this.items.find(item => item.id === product.id); // ищем товар в корзине по его id
+        if(existingItem) { // Если товар найден в корзине
             if(quantity === 1 && existingItem.quantity === 1) {
-                // Если товар уникальный, добавляем только один экземпляр
-                return;
+                return; // Если товар уникальный, добавляем только один экземпляр
             }
             existingItem.quantity += quantity; // Увеличиваем количество для многократного товара
-        } else {
+        } else { //Если товар не найден в корзине 
             this.items.push({...product, quantity}); // Добавляем товар с количеством
         }
     }
 
     // Уменьшение количества товара в корзине
     reduceProductQuantity(productId: number): void {
-        const item = this.items.find(item => item.id === productId);
+        const item = this.items.find(item => item.id === productId); // ищем товар в корзине по его id
         if(item && item.quantity > 1) {
-            item.quantity -= 1;
+            item.quantity -= 1; // Уменьшаем количество товара на 1
         }
     }
 
